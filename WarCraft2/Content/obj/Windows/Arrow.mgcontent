@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/aarte_000/Documents/Visual Studio 2015/Projects/WarCraft2/WarCraft2/Content/Arrow.png</SourceFile>
+  <SourceTime>2017-01-26T20:03:22.751316-08:00</SourceTime>
+  <DestFile>C:/Users/aarte_000/Documents/Visual Studio 2015/Projects/WarCraft2/WarCraft2/Content/bin/Windows/Arrow.xnb</DestFile>
+  <DestTime>2017-01-26T22:45:39.0423902-08:00</DestTime>
+  <Importer>TextureImporter</Importer>
+  <ImporterTime>2015-04-29T10:14:44-07:00</ImporterTime>
+  <Processor>TextureProcessor</Processor>
+  <ProcessorTime>2015-04-29T10:14:44-07:00</ProcessorTime>
+  <Parameters>
+    <Key>ColorKeyColor</Key>
+    <Value>255,0,255,255</Value>
+  </Parameters>
+  <Parameters>
+    <Key>ColorKeyEnabled</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>GenerateMipmaps</Key>
+    <Value>False</Value>
+  </Parameters>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>ResizeToPowerOfTwo</Key>
+    <Value>False</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Color</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

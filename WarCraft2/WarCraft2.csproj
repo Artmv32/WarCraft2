@@ -45,6 +45,17 @@
     <Compile Include="Navigation\MoverComponent.cs" />
     <Compile Include="Navigation\NavigationArea.cs" />
     <Compile Include="Navigation\NavigationSheet.cs" />
+    <Compile Include="PathFinder\GridRect.cs" />
+    <Compile Include="PathFinder\Grid\BaseGrid.cs" />
+    <Compile Include="PathFinder\Grid\DynamicGrid.cs" />
+    <Compile Include="PathFinder\Grid\DynamicGridWPool.cs" />
+    <Compile Include="PathFinder\Grid\PartialGridWPool.cs" />
+    <Compile Include="PathFinder\Grid\StaticGrid.cs" />
+    <Compile Include="PathFinder\Heuristic.cs" />
+    <Compile Include="PathFinder\IPathFinder.cs" />
+    <Compile Include="PathFinder\JumpPointFinder.cs" />
+    <Compile Include="PathFinder\NodePool.cs" />
+    <Compile Include="PathFinder\PathFinder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
