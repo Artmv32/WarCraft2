@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using WarCraft2.Common;
 using WarCraft2.Navigation;
+using WarCraft2.PathFinder;
 
 namespace WarCraft2
 {
@@ -13,15 +14,16 @@ namespace WarCraft2
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        MoverComponent _mover;
-        private NavigationArea _navi;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            Components.Add(_mover = new MoverComponent(this));
-            Components.Add(_navi = new NavigationArea(this));
+
+            var pathFinder = new PathFinderImplementation(this);
+            Components.Add(pathFinder);
+            Services.AddService<IPathFinder>(pathFinder);
+
             var diag = new DiagnosticsComponent(this);
             Components.Add(diag);
             Services.AddService<IDiagnostics>(diag);
@@ -36,21 +38,30 @@ namespace WarCraft2
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            var map = new MapCell[512, 512];
+            map[1, 1] = MapCell.Obstacle;
+            map[10, 0] = MapCell.Obstacle;
+            map[10, 2] = MapCell.Obstacle;
+            map[10, 3] = MapCell.Obstacle;
+            map[10, 4] = MapCell.Obstacle;
 
-            _navi.TopLeft = new Vector2(10);
-            _navi.Map = new NavigationCell[16, 16];
+            for (int i = 0; i < 15; i++)
+            {
+                map[i, 8] = MapCell.Obstacle;
+            }
 
-            var area = _navi;
-            area.Map[1, 1] = NavigationCell.Unit;
-            //area.Map[10, 0] = NavigationCell.PermanentObstacle;
-            //area.Map[10, 2] = NavigationCell.PermanentObstacle;
-            //area.Map[10, 3] = NavigationCell.PermanentObstacle;
-            //area.Map[10, 4] = NavigationCell.PermanentObstacle;
+            bool isLeft = true;
+            for (int i = 20; i < 500; i += 2)
+            {
+                isLeft = !isLeft;
+                for (int j = isLeft ? 0 : 1; j < (isLeft ? 512 : 511); j++)
+                {
+                    map[j, i] = MapCell.Obstacle;
+                }
+            }
 
-            //for (int i = 0; i < 15; i++)
-            //{
-            //    area.Map[i, 8] = NavigationCell.PermanentObstacle;
-            //}
+            Services.GetService<IPathFinder>().Initialize(map);
+
             base.Initialize();
         }
 
@@ -88,21 +99,11 @@ namespace WarCraft2
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 var m = Mouse.GetState().Position;
-                _mover.Create(new Vector2(), new Vector2(m.X, m.Y), 1.0f / 1.0f);
+                //_mover.Create(new Vector2(), new Vector2(m.X, m.Y), 1.0f / 1.0f);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                _navi.TopLeft -= new Vector2(5);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
-            {
-                var m = Mouse.GetState().Position;
-                //_navi.FindRoute(new Point(12, 12 ), new Point(m.X / 32, m.Y / 32));
-                for (int i = 0; i < 35; i++)
-                {
-                    _navi.FindRoute(new Point(15, 15), new Point(m.X / 32, m.Y / 32));
-                }
+                //_navi.TopLeft -= new Vector2(5);
             }
 
             // TODO: Add your update logic here
@@ -119,6 +120,12 @@ namespace WarCraft2
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            {
+                var m = Mouse.GetState().Position;
+                var pathFinder = Services.GetService<IPathFinder>();
+                var path = pathFinder.FindRoute(new Point(pathFinder.Width - 1, pathFinder.Height - 1), new Point(m.X / 32, m.Y / 32));
+            }
 
             base.Draw(gameTime);
         }

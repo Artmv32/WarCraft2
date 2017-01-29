@@ -38,9 +38,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Common\Camera2D.cs" />
     <Compile Include="Common\DiagnosticsComponent.cs" />
     <Compile Include="Common\Pool.cs" />
     <Compile Include="Common\Primitives2D.cs" />
+    <Compile Include="Common\RectangleF.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Navigation\MoverComponent.cs" />
     <Compile Include="Navigation\NavigationArea.cs" />
@@ -55,7 +57,7 @@
     <Compile Include="PathFinder\IPathFinder.cs" />
     <Compile Include="PathFinder\JumpPointFinder.cs" />
     <Compile Include="PathFinder\NodePool.cs" />
-    <Compile Include="PathFinder\PathFinder.cs" />
+    <Compile Include="PathFinder\PathFinderImplementation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
